@@ -1,16 +1,22 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, RecipesComponent, ShoppingListComponent],
+  imports: [RouterOutlet, RouterModule, CommonModule , HeaderComponent, RecipesComponent, ShoppingListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'course-project';
+  loadedFeature = 'recipe';
+
+  onNavigate(feature: string){
+    console.log(feature)
+    this.loadedFeature = feature;
+  }
 }

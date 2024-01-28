@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { Recipe } from '../recipe.model';
 import { CommonModule } from '@angular/common';
+import { RecipeService } from '../recipe.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -11,9 +13,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './recipe-list.component.css'
 })
 export class RecipeListComponent {
-  recipes: Recipe[] = [
-    new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg'),
-    new Recipe('A Test Recipe', 'This is simply a test', 'https://upload.wikimedia.org/wikipedia/commons/1/15/Recipe_logo.jpeg')
-  ]
+  recipes!: Recipe[];
+
+  constructor(private recipeServise: RecipeService,
+    private router: Router,
+    private route: ActivatedRoute){}
+
+  ngOnInit(){
+    this.recipes = this.recipeServise.getRecipes()
+  }
+
+  onNewRecipe(){
+    this.router.navigate(['new'], {relativeTo: this.route})
+  }
 
 }
