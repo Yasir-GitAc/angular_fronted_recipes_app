@@ -13,10 +13,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  loadedFeature = 'recipe';
 
-  onNavigate(feature: string){
-    console.log(feature)
-    this.loadedFeature = feature;
-  }
 }
